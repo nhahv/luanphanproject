@@ -1,0 +1,17 @@
+<module>
+
+      <!-- Inherit the core Web Toolkit stuff.                        -->
+      <inherits name='com.google.gwt.user.User'/>   	
+    <inherits name='com.gwtext.GwtExt'/>
+    <!--  inherit css based theme -->
+      <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+      <!-- Specify the app entry point class.                         -->
+      <entry-point class='com.asnet.luanphan.client.Application'/>
+    
+      <!-- Specify the application specific style sheet.              -->
+      <stylesheet src="js/resources/css/ext-all.css" />
+	<script src="js/adapter/ext/ext-base.js" />
+	<script src="js/ext-all.js" />
+	  <servlet class="com.asnet.luanphan.server.ApplicationImpl" path="/applicationService"/>
+</module>
