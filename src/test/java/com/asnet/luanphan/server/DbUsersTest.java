@@ -12,7 +12,7 @@ public class DbUsersTest {
 		DbUsers dbUser = new DbUsers();
 		User user = new User();
 		user.password = "abc123";
-		user.username = "admin";
+		user.loginname = "admin";
 		Boolean result = dbUser.isUserValid(user);
 		Boolean expectedResult = true;
 		Assert.assertEquals(expectedResult, result);
@@ -20,7 +20,7 @@ public class DbUsersTest {
 		
 		
 		user.password ="abc123";
-		user.username ="luanphan";
+		user.loginname ="luanphan";
 		
 		expectedResult = true;
 		result = dbUser.isUserValid(user);

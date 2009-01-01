@@ -11,9 +11,13 @@ import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.form.event.CheckboxListenerAdapter;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Ext;
+import com.gwtext.client.core.ExtElement;
 
 
 public class LoginWidget {
@@ -26,6 +30,7 @@ public class LoginWidget {
 	
 	public LoginWidget(){
 		loginPanel = new Panel();
+		loginPanel.setId("loginPanel");		
 		mainForm = new FormPanel();
 		loginName = new TextField();
 		password = new TextField();
@@ -38,9 +43,8 @@ public class LoginWidget {
 		mainForm.setTitle("Login");
 		mainForm.setWidth(350);
 		mainForm.setLabelWidth(75);
-		
-		
-		loginName.setAllowBlank(false);
+				
+	    loginName.setAllowBlank(false);
 		loginName.setFieldLabel("Username:");
 		loginName.setName("username");
 		loginName.setWidth(230);
@@ -56,12 +60,26 @@ public class LoginWidget {
 		initButton();
 		
 		
+		
+		Checkbox rememberMe = new Checkbox();  
+		rememberMe.setBoxLabel("Remember my ID & password");  
+		rememberMe.addListener(new CheckboxListenerAdapter() {  
+		           public void onCheck(Checkbox field, boolean checked) {  
+		               if (checked) {  
+		                   MessageBox.alert("You have checked, but this function hasn't been completed yet");
+		               } else {  
+		                    MessageBox.alert("You have just unchecked, but this function hasn't been completed yet!" );
+		               }  
+		           }  
+		       });
+				
 		mainForm.add(loginName);
 		mainForm.add(password);
 		mainForm.add(loginBtn);
+		mainForm.add(rememberMe);
 		
 		loginPanel.setBorder(false);
-		loginPanel.setPaddings(5);
+		loginPanel.setPaddings(15);
 		loginPanel.add(mainForm);
 		
 	}
@@ -69,6 +87,8 @@ public class LoginWidget {
 		loginBtn.setText("Login");
 		loginBtn.addListener(new ButtonListenerAdapter() {
 			public void onClick(Button button, EventObject e) {
+				final ExtElement element = Ext.get("loginPanel");
+				element.mask("Loading");
 				loginToSite();
 			}
 		});
@@ -76,7 +96,7 @@ public class LoginWidget {
 	}
 	private void loginToSite(){
 		User user = new User();
-		user.username = loginName.getText();
+		user.loginname = loginName.getText();
 		user.password = password.getText();
 		final ApplicationServiceAsync loginService = Util.getInstance();
 		ServiceDefTarget target = (ServiceDefTarget) loginService;
@@ -93,10 +113,13 @@ public class LoginWidget {
 					//Panel panel = contentPage.setMainPanel(fName.getText());
 					//Viewport viewport = new Viewport(panel);
 					MessageBox.alert("Login successful");
-					//
+					final ExtElement element = Ext.get("loginPanel");
+					element.unmask();
 					
 				} else {
 					MessageBox.alert("Invalid user or password. Please, try again.");
+					final ExtElement element = Ext.get("loginPanel");
+					element.unmask();
 				}
 			}
 

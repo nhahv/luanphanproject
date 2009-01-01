@@ -1,12 +1,19 @@
 package com.asnet.luanphan.client.UI;
 
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.QuickTipsConfig;
 import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.ToolbarMenuButton;
 import com.gwtext.client.widgets.ToolbarTextItem;
+import com.gwtext.client.widgets.event.ButtonListener;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.layout.BorderLayoutData;
 import com.gwtext.client.widgets.menu.Adapter;
 import com.gwtext.client.widgets.menu.CheckItem;
 import com.gwtext.client.widgets.menu.ColorMenu;
@@ -16,16 +23,18 @@ import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.MenuItem;
 import com.gwtext.client.widgets.menu.TextItem;
 import com.gwtext.client.widgets.menu.event.CheckItemListenerAdapter;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.RegionPosition;
 public class Navigation {
-	private static Panel navPanel;
+	private Panel navpanel = new Panel(); 
 	public Navigation(){
-		navPanel = new Panel();
+		navpanel = new Panel();
 		init();
 	}
 	private void init(){
-		Panel panel = new Panel();  
-		panel.setBorder(false);  
-		panel.setPaddings(15);  
+		
+		navpanel.setBorder(false);  
+		navpanel.setPaddings(15);  
 		//create a toolbar and various menu items  
 		Toolbar toolbar = new Toolbar();  
 		   
@@ -167,18 +176,102 @@ public class Navigation {
 		toolbar.addButton(toggleButton);  
 		
 		toolbar.addSeparator();  
-		ToolbarTextItem ti = new ToolbarTextItem("Text Item");  
-		toolbar.addItem(ti);  
+		ToolbarButton uploadBtn = new ToolbarButton("Upload");  
+		uploadBtn.setEnableToggle(true);
+		uploadBtn.setPressed(true);
+		uploadBtn.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e){
+				uploadFile();
+			}
+		});
+		toolbar.addButton(uploadBtn);
+		
+		toolbar.addSeparator();  
+		ToolbarButton downloadBtn = new ToolbarButton("Download");  
+		downloadBtn.setEnableToggle(true);
+		downloadBtn.setPressed(true);
+		downloadBtn.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e){
+				downloadFile();
+			}
+		});
+		toolbar.addButton(downloadBtn);
+		
+		toolbar.addSeparator();  
+		ToolbarButton searchBtn = new ToolbarButton("Search");  
+		searchBtn.setEnableToggle(true);
+		searchBtn.setPressed(true);
+		searchBtn.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e){
+				search();
+			}
+		});
+		toolbar.addButton(searchBtn);
+		
+		
+		toolbar.addSeparator();
+		ToolbarButton loginBtn = new ToolbarButton("Login");  
+		loginBtn.setEnableToggle(true);  
+		loginBtn.setPressed(true);
+		loginBtn.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e){
+				loginToSite();
+			}
+		});
+		toolbar.addButton(loginBtn);
 		
 		Panel toolbarPanel = new Panel();  
 		toolbarPanel.setWidth(500);  
 		toolbarPanel.setHeight(400);  
 		 toolbarPanel.setTopToolbar(toolbar);  
-		panel.add(toolbar);  
+		navpanel.add(toolbar);  
 		
 		 
 	}	
-	public static Panel getNavigation(){
-		return navPanel;
+	private void loginToSite(){
+		RootPanel.get().clear();
+		BorderPanel borderPanel = new BorderPanel();
+		LoginWidget loginWidget = new LoginWidget();
+		Panel panel = loginWidget.getLoginPanel();
+		Button signupLbl = new Button("Sign up for my site");
+		signupLbl.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e){
+				signup();
+			}
+		});
+		panel.add(signupLbl);
+	    borderPanel.addCenterPanel(panel);
+		Panel mainPanel = borderPanel.getBorderPanel();
+		
+		
+				
+		
+		//mainPanel.add(panel, new BorderLayoutData(RegionPosition.CENTER));
+		RootPanel.get().add(mainPanel);
+	}
+	private void signup(){
+		RootPanel.get().clear();
+		SignUpPanel signUpPanel = new SignUpPanel();
+		Panel panel = signUpPanel.getSignUpPanel();
+		
+		BorderPanel borderPanel = new BorderPanel();
+		borderPanel.addCenterPanel(panel);
+		
+		RootPanel.get().add(borderPanel.getBorderPanel());
+	}
+	private void uploadFile(){
+		Window.alert("Upload function here");
+	}
+	private void downloadFile(){
+		Window.alert("Download function here");
+	}
+	private void search(){
+		RootPanel.get().clear();
+		SearchPanel searchPanel = new SearchPanel();
+		Panel mainPanel = searchPanel.getSeachPanel();
+		RootPanel.get().add(mainPanel);
+	}
+	public Panel getNavigation(){
+		return navpanel;
 	}
 }
