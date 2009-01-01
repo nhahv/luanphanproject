@@ -25,8 +25,8 @@ public class DbUsers extends DbConnection {
 		
 		//cau lenh mysql select du lieu theo user va password nhap vao
 		String query = "SELECT * FROM " + USERS_TABLENAME + " WHERE "
-				+ USERS_TABLENAME + ".user_loginname='" + user.username + "' AND "
-				+ USERS_TABLENAME + ".user_password='" + user.password + "'";
+				+ USERS_TABLENAME + ".User_Loginname='" + user.loginname + "' AND "
+				+ USERS_TABLENAME + ".User_Password='" + user.password + "'";
 		//thuc thi cau lenh
 		try {
 			Connection conn = getConnection();

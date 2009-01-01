@@ -7,9 +7,12 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.core.EventObject;  
 import com.gwtext.client.core.RegionPosition;  
 import com.gwtext.client.widgets.Button;  
+import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.TabPanel;  
 import com.gwtext.client.widgets.Window;  
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;  
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.BorderLayout;  
 import com.gwtext.client.widgets.layout.BorderLayoutData; 
 public class CenterPanel extends Panel{
@@ -47,7 +50,13 @@ public class CenterPanel extends Panel{
 	    
 		navPanel.setHtml(getBogusMarkup());
 		
-		Button loadbtn = new Button("LoadFile");
+		final Button loadbtn = new Button("UploadFile");
+		
+		loadbtn.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e){
+				uploadFile(button);
+			}
+		});
 		navPanel.setTopToolbar(loadbtn);
 	    navPanel.setWidth(200);  
 	    navPanel.setCollapsible(false);  
@@ -60,6 +69,9 @@ public class CenterPanel extends Panel{
 	    westData.setMargins(3, 3, 0, 3);  
 	    westData.setCMargins(3, 3, 3, 3);  
 	      
+	         
+        
+	    
 	    final Window window = new Window();  
 	    window.setTitle("Simple tokenizer");  
 	    window.setClosable(true);  
@@ -68,7 +80,7 @@ public class CenterPanel extends Panel{
 	    window.setPlain(true);  
 	    window.setLayout(new BorderLayout());  
 	    window.add(tabPanel, centerData);  
-	    window.add(navPanel, westData);  
+	    window.add(navPanel, westData);
 	    window.setCloseAction(Window.HIDE);  
 	      
 	    Button button = new Button("Tokenize");  
@@ -83,6 +95,24 @@ public class CenterPanel extends Panel{
 	
 	public Panel getCenterPanel(){
 		return panel;
+	}
+	private void uploadFile(Button button){
+		
+		    Window window = new Window();  
+		    window.setTitle("File path");  
+		    window.setClosable(true);  
+		    window.setWidth(350);  
+		    window.setHeight(100);  
+		    //window.setPlain(true);  
+		    //window.setLayout(new BorderLayout());
+		    FormPanel panel = new FormPanel();
+		    TextField file = new TextField("File", "file", 100);
+		    panel.add(file);
+		    window.add(panel, new BorderLayoutData(RegionPosition.CENTER));  
+		    //window.add(navPanel, westData);
+		    window.setCloseAction(Window.HIDE);
+		    window.show(button.getId());
+		    
 	}
 	private static String getBogusMarkup() {  
 		return "<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. " +  

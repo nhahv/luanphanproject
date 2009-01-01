@@ -15,7 +15,7 @@ public class TopPanel extends Panel {
 	   this.setHeight(70); 	   
 	   
 	   String pageTitle = "<h1>" + "My Google Web Tookit Demo" + "</h1><h2>"
-		+ "Luan Phan" + "</h2>";
+		+ "Asnet Company" + "</h2>";
 
 	   // Add the title and some images to the title bar
 	   HorizontalPanel titlePanel = new HorizontalPanel();

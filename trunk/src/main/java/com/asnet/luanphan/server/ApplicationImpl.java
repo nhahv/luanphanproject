@@ -1,6 +1,6 @@
 package com.asnet.luanphan.server;
-
 import com.asnet.luanphan.client.ApplicationService;
+//import com.asnet.luanphan.client.datamodel.FileInfo;
 import com.asnet.luanphan.client.datamodel.User;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -14,4 +14,7 @@ public class ApplicationImpl extends RemoteServiceServlet implements Application
 		System.out.println(accepted);
 		return accepted;
 	}
+	//public FileInfo tokenize(FileInfo fileInfo){
+		//return fileInfo;
+	//}
 }

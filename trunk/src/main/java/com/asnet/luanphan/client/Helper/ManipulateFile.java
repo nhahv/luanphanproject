@@ -1,25 +1,22 @@
-package com.asnet.luanphan.lucene;
+	/**package com.asnet.luanphan.client.Helper;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.LinkedList;
 import java.util.List;
 
 
-import org.apache.lucene.analysis.Token;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.util.StringHelper;
 
-public class FileInput_Output {
+//import org.apache.lucene.analysis.Token;
+//import org.apache.lucene.analysis.TokenStream;
+//import org.apache.lucene.util.StringHelper;
+public class ManipulateFile {
 	public static String getData(String filePath){
 	File file = new File(filePath);
 	FileInputStream fis = null;
@@ -65,6 +62,7 @@ public class FileInput_Output {
 	// return result
 	return result;
 	}
+
 	public static void writeByLine(String filename, String encoding, TokenStream ts) throws IOException{
 		FileOutputStream fileOutput = new FileOutputStream(filename);
 		OutputStreamWriter outWriter = new OutputStreamWriter(fileOutput, encoding);
@@ -82,4 +80,5 @@ public class FileInput_Output {
 		
 	}
 
-}
+}*/
+

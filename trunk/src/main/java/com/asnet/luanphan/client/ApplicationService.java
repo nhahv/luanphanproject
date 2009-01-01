@@ -1,5 +1,6 @@
 package com.asnet.luanphan.client;
 
+//import com.asnet.luanphan.client.datamodel.FileInfo;
 import com.asnet.luanphan.client.datamodel.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -14,4 +15,5 @@ public interface ApplicationService extends RemoteService{
 		}
 	}
 	public boolean isExistsUser(User user);
+	//public FileInfo tokenize(FileInfo fileInfo);
 }
