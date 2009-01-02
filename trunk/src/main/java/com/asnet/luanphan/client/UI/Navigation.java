@@ -3,6 +3,7 @@ package com.asnet.luanphan.client.UI;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.QuickTipsConfig;
 import com.gwtext.client.widgets.Toolbar;
@@ -122,8 +123,8 @@ public class Navigation {
 		ToolbarButton menuButton = new ToolbarButton("Button w/ Menu");  
 		menuButton.setMenu(menu);  
 		menuButton.setIconCls("bmenu");  
-		toolbar.addButton(menuButton);  
-		toolbar.addSeparator();  
+		//toolbar.addButton(menuButton);  
+		//toolbar.addSeparator();  
 		   
 		Menu splitMenu = new Menu();  
 		Item bi = new Item();  
@@ -155,15 +156,15 @@ public class Navigation {
 		   
 		ToolbarMenuButton button2 = new ToolbarMenuButton("Split Button", splitMenu);  
 		   
-		toolbar.addButton(button2);  
-		 toolbar.addSeparator();  
+		//toolbar.addButton(button2);  
+		 //toolbar.addSeparator();  
 		   
-		ToolbarButton toggleButton = new ToolbarButton("Toggle Me");  
+		ToolbarButton toggleButton = new ToolbarButton("Home");  
 		toggleButton.setEnableToggle(true);  
 		toggleButton.setPressed(true);  
 		QuickTipsConfig tipsConfig = new QuickTipsConfig();  
-		tipsConfig.setText("This is a quicktip with a title");  
-		tipsConfig.setTitle("Tip Title");  
+		tipsConfig.setText("Site similarity detecting");  
+		tipsConfig.setTitle("Home");  
 		toggleButton.setTooltip(tipsConfig);  
 		
 		ToolbarButton iconOnly = new ToolbarButton();  
@@ -171,8 +172,8 @@ public class Navigation {
 		iconOnly.setCls("x-btn-icon");  
 		iconOnly.setTooltip("<b>Quick Tips</b><br/>Icon only button with tooltip");  
 		
-		toolbar.addButton(iconOnly);  
-		toolbar.addSeparator();  
+		//toolbar.addButton(iconOnly);  
+		//toolbar.addSeparator();  
 		toolbar.addButton(toggleButton);  
 		
 		toolbar.addSeparator();  
@@ -233,6 +234,7 @@ public class Navigation {
 		BorderPanel borderPanel = new BorderPanel();
 		LoginWidget loginWidget = new LoginWidget();
 		Panel panel = loginWidget.getLoginPanel();
+		panel.setPaddings(15);
 		Button signupLbl = new Button("Sign up for my site");
 		signupLbl.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e){
@@ -260,10 +262,15 @@ public class Navigation {
 		RootPanel.get().add(borderPanel.getBorderPanel());
 	}
 	private void uploadFile(){
-		Window.alert("Upload function here");
+		RootPanel.get().clear();
+		UploadPanel uploadPanel = new UploadPanel();
+		Panel upload = uploadPanel.getUploadPanel();
+		
+		RootPanel.get().add(upload);
+		
 	}
 	private void downloadFile(){
-		Window.alert("Download function here");
+		MessageBox.alert("Download function's here, but this does nothing");
 	}
 	private void search(){
 		RootPanel.get().clear();
