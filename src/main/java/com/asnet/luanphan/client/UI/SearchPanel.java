@@ -1,5 +1,6 @@
 package com.asnet.luanphan.client.UI;
 
+import com.google.gwt.user.client.ui.Image;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.MessageBox;
@@ -8,7 +9,6 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
-import com.gwtextux.client.widgets.image.Image;
 import com.gwtext.client.core.EventObject;
 public class SearchPanel {
 	private Panel searchPanel;
@@ -20,12 +20,12 @@ public class SearchPanel {
 		TopPanel topPanel = new TopPanel();
 		searchPanel.add(topPanel, new BorderLayoutData(RegionPosition.NORTH));
 		Image image = new Image();
-		image.setSrc("images/logodhdn.jpg");
+		image.setUrl("images/logodhdn.jpg");
 		
 		searchPanel.add(image);
 		
 		Image icon = new Image();
-		icon.setSrc("images/covw.jpg");
+		icon.setUrl("images/covw.jpg");
 		searchPanel.add(icon);
 		
 		FormPanel formPanel = new FormPanel();

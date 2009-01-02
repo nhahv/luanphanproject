@@ -30,7 +30,8 @@ public class LoginWidget {
 	
 	public LoginWidget(){
 		loginPanel = new Panel();
-		loginPanel.setId("loginPanel");		
+		loginPanel.setId("loginPanel");
+		loginPanel.setPaddings(15);
 		mainForm = new FormPanel();
 		loginName = new TextField();
 		password = new TextField();
@@ -77,9 +78,9 @@ public class LoginWidget {
 		mainForm.add(password);
 		mainForm.add(loginBtn);
 		mainForm.add(rememberMe);
+		mainForm.setMargins(15);
 		
 		loginPanel.setBorder(false);
-		loginPanel.setPaddings(15);
 		loginPanel.add(mainForm);
 		
 	}
@@ -105,13 +106,9 @@ public class LoginWidget {
 		target.setServiceEntryPoint(moduleRelativeURL);
 		final AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 			public void onSuccess(Boolean result) {
-				// boolean ok = Boolean.valueOf(result.toString());
+				
 				if (result.booleanValue()) {
-					//RootPanel.get().clear();
-					//ContentPage contentPage = new ContentPage();
 					
-					//Panel panel = contentPage.setMainPanel(fName.getText());
-					//Viewport viewport = new Viewport(panel);
 					MessageBox.alert("Login successful");
 					final ExtElement element = Ext.get("loginPanel");
 					element.unmask();
