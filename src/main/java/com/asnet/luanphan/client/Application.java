@@ -1,31 +1,22 @@
 package com.asnet.luanphan.client;
 
-import com.asnet.luanphan.client.ApplicationService.Util;
 import com.asnet.luanphan.client.UI.BorderPanel;
-import com.asnet.luanphan.client.UI.BottomPanel;
-import com.asnet.luanphan.client.UI.CenterPanel;
-import com.asnet.luanphan.client.datamodel.FileInfo;
+import com.asnet.luanphan.client.UI.FooterPanel;
+import com.asnet.luanphan.client.UI.HeaderPanel;
+import com.asnet.luanphan.client.UI.LoginWidget;
+import com.asnet.luanphan.client.UI.MasterPanel;
+import com.asnet.luanphan.client.UI.NavigationPanel;
+import com.asnet.luanphan.client.UI.SearchPanel;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Margins;
 import com.gwtext.client.core.RegionPosition;
-import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.Component;
-import com.gwtext.client.widgets.ComponentMgr;
-import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Viewport;
-import com.gwtext.client.widgets.Window;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
-import com.gwtext.client.widgets.layout.RowLayout;
-import com.gwtext.client.widgets.layout.RowLayoutData;
+import com.gwtext.client.widgets.layout.LayoutData;
 
 
 
@@ -33,78 +24,68 @@ import com.gwtext.client.widgets.layout.RowLayoutData;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Application implements EntryPoint {
-	private BorderPanel borderPanel;
-	
+	public static Panel mainPanel;	
+	public static Panel borderPanel;
+	public static Panel headerPanel;
+	public static Panel footerPanel;
+	public static Panel centerPanel;
+	public static Panel navigationPanel;
+	public static LoginWidget loginPanel;
+	public static SearchPanel searchPanel;
 	
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() { 
+	  loginPanel = new LoginWidget();
 	 init(); 
      
   }
   public void init(){
-	  
-	 Panel panel = new Panel();  
-	 panel.setBorder(false);  
-	 panel.setPaddings(15);  
-	 panel.setAutoScroll(true);    
-	 //panel.setLayout(new FitLayout());  
-	     
-	 final Panel wrapperPanel = new Panel();  
-	 wrapperPanel.setLayout(new RowLayout());  
-	 wrapperPanel.setBorder(false);  
-	 //wrapperPanel.setBodyStyle("border-style:dotted;border-color:blue;");  
-	 wrapperPanel.setAutoScroll(true);   
+	  	mainPanel = new Panel();
+		mainPanel.setBorder(false);		
+		//mainPanel.setLayout(new FitLayout());
+		borderPanel = new Panel();
+		//borderPanel.setLayout(new BorderLayout());
+
+		// add top panel
+		headerPanel = new HeaderPanel();
+		headerPanel.setBorder(false);
+		borderPanel.add(headerPanel, new BorderLayoutData(
+				RegionPosition.NORTH));
+		//navigation
+		navigationPanel = new NavigationPanel();
+		//Search
+		searchPanel = new SearchPanel();
+		centerPanel = new Panel();
+		centerPanel.setId("centerPanel");
+		centerPanel.add(navigationPanel);
+		centerPanel.add(searchPanel);
+		borderPanel.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));
+		//footer
+		footerPanel = new FooterPanel();
+		BorderLayoutData bld = new BorderLayoutData(
+				RegionPosition.SOUTH);
+		bld.setMinSize(100);
+		bld.setMaxSize(200);
+		bld.setMargins(new Margins(0, 0, 0, 0));
+		bld.setSplit(true);
+		borderPanel.add(footerPanel, bld);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				
+		
+		mainPanel.add(borderPanel);
+		RootPanel.get().add(mainPanel);
 	
-	 Panel firstPanel = new Panel();  
-	 firstPanel.setTitle("My topic");  
-	 firstPanel.setClosable(true);  
-	 firstPanel.setHtml("<h1>Similarity detecting.</h1>");    
-	 firstPanel.setCollapsible(true);
-	 firstPanel.setCollapsed(false);    
-	  
-	
-	     
-	 wrapperPanel.add(firstPanel, new RowLayoutData(50));  
-	     
-	 Panel secondPanel = new Panel();  
-	 secondPanel.setTitle("All tools I have to learn");  
-	 secondPanel.setHtml("<h2>Maven<br>" +
-			 			"Google Web Toolkit<br>" +
-			 			"Spring<br>" +
-			 			"VnTokenizer" +
-			 			"Lucene<br></h2>");  
-	 secondPanel.setId("greedy");  
-	 secondPanel.setCollapsible(true);  
-	 secondPanel.setAutoScroll(true);  
-	 secondPanel.setBodyStyle("margin-bottom:10px");  
-	 secondPanel.setCollapsed(true);    
-	 wrapperPanel.add(secondPanel, new RowLayoutData("50%"));  
-	 
-	  
-	 CenterPanel centerPanel = new CenterPanel();
-	
-	 Panel tokenizePanel = centerPanel.getCenterPanel();
-	 Panel third = new Panel();  
-	 third.setTitle("Demo something");  
-	 third.setId("panel3");  
-	 third.setCollapsible(true);	 
-	 third.add(tokenizePanel);
-	 wrapperPanel.add(third, new RowLayoutData(70));  
-	  
-	  
-	 Panel fourth = new Panel();  
-	 fourth.setTitle("Content");  
-	 fourth.setHtml("Content");  
-	 fourth.setId("bottom");  
-	 wrapperPanel.add(fourth, new RowLayoutData(60));  
-	 
-	 panel.add(wrapperPanel);
-	 borderPanel = new BorderPanel();
-	 borderPanel.addCenterPanel(panel); 
-	 Panel border = borderPanel.getBorderPanel();
-	 RootPanel.get().add(border);
 	 
   }
 

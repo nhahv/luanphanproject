@@ -17,33 +17,19 @@ import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.RegionPosition;
-public class UploadPanel {
-	private Panel uploadPanel;
+public class UploadPanel extends Panel{
 	public UploadPanel(){
-		uploadPanel = new Panel();
-		uploadPanel.setBorder(false);
-		uploadPanel.setPaddings(15);
+		this.setBorder(false);
 		init();
 	}
-	private void init(){
-		TopPanel topPanel = new TopPanel();
-		uploadPanel.add(topPanel, new BorderLayoutData(RegionPosition.NORTH));
-		Image image = new Image();
-		image.setUrl("images/logodhdn.jpg");
-		
-		uploadPanel.add(image);
-		
-		Navigation navigation = new Navigation();
-		Panel navPanel = navigation.getNavigation();
-		uploadPanel.add(navPanel, new BorderLayoutData(RegionPosition.CENTER));
-		
+	private void init(){		
 		com.gwtext.client.widgets.form.FormPanel form = new com.gwtext.client.widgets.form.FormPanel();
 		form.setFileUpload(true);
 		form.setFrame(true);
 		
 		final FormPanel formUpload = new FormPanel();
 		
-		formUpload.setAction(GWT.getModuleBaseURL());
+		formUpload.setAction(GWT.getModuleBaseURL() + "upload");
 		formUpload.setMethod(FormPanel.METHOD_POST);
 		formUpload.setEncoding(FormPanel.ENCODING_MULTIPART);
 		
@@ -74,20 +60,14 @@ public class UploadPanel {
 			}
 			public void onSubmitComplete(FormSubmitCompleteEvent event){
 				
-				CenterPanel centerPanel = new CenterPanel();
+				TokenizeWidget centerPanel = new TokenizeWidget();
 				Panel panel = centerPanel.getCenterPanel();
+				panel.setBorder(true);
 				RootPanel.get().add(panel);
 			}
-		});
-		
-		BorderLayoutData bld = new BorderLayoutData(RegionPosition.CENTER);
-		bld.setMargins(15, 150, 0, 5);
-		
+		});		
 		form.add(formUpload);
-		uploadPanel.add(form);
-		//uploadPanel.add(formUpload, bld);
-	}
-	public Panel getUploadPanel(){
-		return uploadPanel;
+		this.add(form);
+		
 	}
 }

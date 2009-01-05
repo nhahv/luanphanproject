@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.lucene.analysis.Token;
 import org.apache.lucene.analysis.TokenStream;
 
-import vn.hus.tokenizer.tokens.LexerToken;
+//import vn.hus.tokenizer.tokens.LexerToken;
 
 import com.asnet.luanphan.client.ApplicationService;
 import com.asnet.luanphan.client.datamodel.FileInfo;
@@ -32,6 +32,7 @@ public class ApplicationImpl extends RemoteServiceServlet  implements Applicatio
 	//public FileInfo tokenize(FileInfo fileInfo){
 		//return fileInfo;
 	//
+	
 	public FileInfo demo(){
 		FileInfo fileInfo = new FileInfo();
 		String listLexers = null;

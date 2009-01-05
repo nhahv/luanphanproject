@@ -16,7 +16,7 @@ public class BorderPanel {
 		initPanel();
 	}
 	private void initPanel(){
-		TopPanel topPanel = new TopPanel();
+		HeaderPanel topPanel = new HeaderPanel();
 		panel.add(topPanel, new BorderLayoutData(RegionPosition.NORTH));
 		
 		Image image = new Image();
@@ -25,9 +25,9 @@ public class BorderPanel {
 		imagePanel.add(image);
 		addCenterPanel(imagePanel);
 		
-		Navigation navigation = new Navigation();
-		Panel navPanel = navigation.getNavigation();
-		panel.add(navPanel, new BorderLayoutData(RegionPosition.CENTER));
+		NavigationPanel navigation = new NavigationPanel();
+		
+		panel.add(navigation, new BorderLayoutData(RegionPosition.CENTER));
 		
 		
 		
@@ -35,9 +35,9 @@ public class BorderPanel {
 		centerPanel.setId("centerPanel");
 		panel.add(centerPanel,new BorderLayoutData(RegionPosition.CENTER));
 		
-		BottomPanel bottomPanel = new BottomPanel();
-		Panel btmPanel = bottomPanel.getBottomPanel();
-		panel.add(btmPanel, new BorderLayoutData(RegionPosition.SOUTH));
+		FooterPanel footerPanel = new FooterPanel();
+		
+		panel.add(footerPanel, new BorderLayoutData(RegionPosition.SOUTH));
 	}
 	public Panel getBorderPanel(){
 		return panel;
