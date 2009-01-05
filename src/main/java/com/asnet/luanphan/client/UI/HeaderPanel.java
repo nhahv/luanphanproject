@@ -6,10 +6,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.VerticalLayout;
-import com.gwtextux.client.widgets.image.Image;
+
 
 
 
@@ -29,8 +30,9 @@ public class HeaderPanel extends Panel{
 		titlePanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		titlePanel.add(images.gwtLogo().createImage());
 		titlePanel.add(new HTML(pageTitle));
-		Image image = new Image("Da Nang University", "images/logodhdn.jpg");
-		image.setWidth(1010);
+		Image image = new Image();
+		image.setUrl("images/logodhdn.jpg");
+		image.setWidth("1010px");
 		HorizontalPanel imagePanel = new HorizontalPanel();
 		imagePanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		imagePanel.add(image);

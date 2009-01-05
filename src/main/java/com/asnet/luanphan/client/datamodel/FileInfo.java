@@ -10,6 +10,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class FileInfo implements IsSerializable{
 	private String filename;
+	private String fileContent;
 	private String listLexers;
 	private String listVnTokens;
 	public FileInfo(){		
@@ -23,6 +24,9 @@ public class FileInfo implements IsSerializable{
 	public void setListVnTokens(String listVnTokens){
 		this.listVnTokens = listVnTokens;
 	}
+	public void setFileContent(String fileContent){
+		this.fileContent =fileContent;
+	}
 	public String getFileName(){
 		return filename;
 	}
@@ -31,5 +35,8 @@ public class FileInfo implements IsSerializable{
 	}
 	public String getListVnTokens(){
 		return listVnTokens;
+	}	
+	public String getFileContent(){
+		return fileContent;
 	}
 }

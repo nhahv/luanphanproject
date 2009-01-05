@@ -23,34 +23,36 @@ import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.BorderLayout;  
 import com.gwtext.client.widgets.layout.BorderLayoutData; 
-public class CenterPanel extends Panel{
-	private Panel panel = new Panel();
+public class TokenizePanel extends Panel{
 	private String filename ="no file to tokenize";
 	private String listLexer ="There is no Lexer";
 	private String listVnToken = "There is no vntoken";
-	public CenterPanel(){
+	private String fileContent="no content";
+	public TokenizePanel(){
 		initCenterPanel();
 	}
 	public void initCenterPanel(){
 		
 		
-		panel.setBorder(false);  
-	    panel.setPaddings(15);  
+		this.setBorder(false);  
+	    this.setPaddings(15);  
 	    
 	    final Button button = new Button("Demo VnTokenize and Lucene");  
 	    button.addListener(new ButtonListenerAdapter() {  
 	    	public void onClick(Button button1, EventObject e) {
-	    		 final ApplicationServiceAsync demoService = Util.getInstance();
+	    		
+	    		final ApplicationServiceAsync demoService = Util.getInstance();
 					ServiceDefTarget target = (ServiceDefTarget) demoService;
-
 					String moduleRelativeURL = GWT.getModuleBaseURL() + "applicationService";
 					target.setServiceEntryPoint(moduleRelativeURL);
+					
 					final AsyncCallback<FileInfo> callback = new AsyncCallback<FileInfo>() {
 						public void onSuccess(FileInfo result) {
 							setFilename(result.getFileName());
 							setListLexer(result.getListLexers());
 							setListVnTokens(result.getListVnTokens());	
-							 //center panel  
+							setFileContent(result.getFileContent());
+							//center panel  
 						    TabPanel tabPanel = new TabPanel();  
 						    tabPanel.setActiveTab(0);  
 						      
@@ -73,16 +75,10 @@ public class CenterPanel extends Panel{
 						    Panel navPanel = new Panel();  
 						    navPanel.setTitle("File content");
 						    
-							navPanel.setHtml(filename);
+							navPanel.setHtml(filename + "<br>" + fileContent);
 							
-							final Button loadbtn = new Button("UploadFile");
 							
-							loadbtn.addListener(new ButtonListenerAdapter(){
-								public void onClick(Button button, EventObject e){
-									uploadFile(button);
-								}
-							});
-							navPanel.setTopToolbar(loadbtn);
+							
 						    navPanel.setWidth(200);  
 						    navPanel.setCollapsible(false);  
 						      
@@ -119,21 +115,12 @@ public class CenterPanel extends Panel{
 					 
 	    	}  
 	    });  
-	    panel.add(button);  
+	    this.add(button);  
 	      
 	    	    
 	}
-	
-	public Panel getCenterPanel(){
-		return panel;
-	}
-	private void uploadFile(Button button){
-		final Window window = new Window();
-			 
-		 
-				
-		    
-		    
+	public void setFileContent(String fileContent){
+		this.fileContent = fileContent;
 	}
 	public void setFilename(String filename){
 		this.filename = filename;
