@@ -1,12 +1,22 @@
 package com.asnet.luanphan.client.UI;
 
 
+import com.asnet.luanphan.client.Application;
 import com.asnet.luanphan.client.ApplicationServiceAsync;
 import com.asnet.luanphan.client.ApplicationService.Util;
 import com.asnet.luanphan.client.datamodel.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Ext;
+import com.gwtext.client.core.ExtElement;
+import com.gwtext.client.core.Position;
+import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
@@ -15,24 +25,22 @@ import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.CheckboxListenerAdapter;
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.core.Ext;
-import com.gwtext.client.core.ExtElement;
+import com.gwtext.client.widgets.layout.BorderLayoutData;
 
 
-public class LoginWidget {
 
-	private Panel loginPanel;
-	private FormPanel mainForm;
+public class LoginWidget extends Panel{
+
+	
+	private FormPanel loginForm;
 	private TextField loginName;
 	private TextField password;
 	private Button loginBtn;
 	
 	public LoginWidget(){
-		loginPanel = new Panel();
-		loginPanel.setId("loginPanel");
-		loginPanel.setPaddings(15);
-		mainForm = new FormPanel();
+		
+		this.setId("loginPanel");		
+		loginForm = new FormPanel();
 		loginName = new TextField();
 		password = new TextField();
 		loginBtn = new Button();
@@ -40,13 +48,15 @@ public class LoginWidget {
 		initLoginWidget();
 	}
 	private void initLoginWidget() {
-		mainForm.setFrame(true);
-		mainForm.setTitle("Login");
-		mainForm.setWidth(350);
-		mainForm.setLabelWidth(75);
+		
+		loginForm.setFrame(true);
+		loginForm.setTitle("Login");
+		loginForm.setWidth(350);
+		loginForm.setLabelWidth(75);
+		loginForm.setButtonAlign(Position.CENTER);
 				
 	    loginName.setAllowBlank(false);
-		loginName.setFieldLabel("Username:");
+		loginName.setFieldLabel("Username");
 		loginName.setName("username");
 		loginName.setWidth(230);
 		loginName.focus();
@@ -54,9 +64,10 @@ public class LoginWidget {
 		
 		
 		password.setPassword(true);
-		password.setFieldLabel("Password:");
+		password.setFieldLabel("Password");
 		password.setName("password");
 		password.setWidth(230);
+		
 		
 		initButton();
 		
@@ -74,14 +85,37 @@ public class LoginWidget {
 		           }  
 		       });
 				
-		mainForm.add(loginName);
-		mainForm.add(password);
-		mainForm.add(loginBtn);
-		mainForm.add(rememberMe);
-		mainForm.setMargins(15);
+		loginForm.add(loginName);
+		loginForm.add(password);
+		loginForm.add(loginBtn);
+		loginForm.add(rememberMe);
 		
-		loginPanel.setBorder(false);
-		loginPanel.add(mainForm);
+		FormPanel formPanel = new FormPanel();
+		formPanel.setFrame(true);
+		formPanel.setWidth(350);
+		formPanel.setLabelWidth(75);
+		formPanel.setLabelAlign(Position.CENTER);
+		
+		Hyperlink signUpLink = new Hyperlink("Sign up for my site", "signup");
+		signUpLink.addClickListener(new ClickListener(){
+			public void onClick(Widget widget){
+				RootPanel.get().clear();
+				Panel borderPanel  = new Panel();
+				borderPanel.add(Application.headerPanel);
+				borderPanel.add(Application.navigationPanel);		
+				borderPanel.add(new SignUpPanel().getSignUpPanel());
+				borderPanel.add(Application.footerPanel);		
+				Panel mainPanel = new Panel();
+				mainPanel.add(borderPanel);
+				RootPanel.get().add(mainPanel);
+			}
+		});
+		signUpLink.setStyleName("fontsize:20");
+		formPanel.add(signUpLink);
+		
+		
+		this.add(loginForm);
+		this.add(formPanel, new BorderLayoutData(RegionPosition.EAST));
 		
 	}
 	private void initButton() {
@@ -109,10 +143,18 @@ public class LoginWidget {
 				
 				if (result.booleanValue()) {
 					
-					MessageBox.alert("Login successful");
+					
 					final ExtElement element = Ext.get("loginPanel");
 					element.unmask();
-					
+					RootPanel.get().clear();
+					Panel borderPanel  = new Panel();
+					borderPanel.add(Application.headerPanel);
+					borderPanel.add(Application.navigationPanel);
+					borderPanel.add(new SearchPanel());
+					borderPanel.add(Application.footerPanel);		
+					Panel mainPanel = new Panel();
+					mainPanel.add(borderPanel);
+					RootPanel.get().add(mainPanel);
 				} else {
 					MessageBox.alert("Invalid user or password. Please, try again.");
 					final ExtElement element = Ext.get("loginPanel");
@@ -125,10 +167,5 @@ public class LoginWidget {
 			}
 		};
 		loginService.isExistsUser(user, callback);
-	}
-	
-	
-	public Panel getLoginPanel(){
-		return loginPanel;
-	}
+	}	
 }

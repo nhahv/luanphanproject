@@ -13,10 +13,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-
+@RemoteServiceRelativePath("upload")
 public class UploadServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpResponse reponse){
-		System.out.print("fasfafserverver");
 		if(!ServletFileUpload.isMultipartContent(request)){
 			return;
 		}
