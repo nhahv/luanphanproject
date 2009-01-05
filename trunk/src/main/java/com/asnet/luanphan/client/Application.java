@@ -1,22 +1,18 @@
 package com.asnet.luanphan.client;
 
-import com.asnet.luanphan.client.UI.BorderPanel;
 import com.asnet.luanphan.client.UI.FooterPanel;
 import com.asnet.luanphan.client.UI.HeaderPanel;
 import com.asnet.luanphan.client.UI.LoginWidget;
-import com.asnet.luanphan.client.UI.MasterPanel;
 import com.asnet.luanphan.client.UI.NavigationPanel;
 import com.asnet.luanphan.client.UI.SearchPanel;
+import com.asnet.luanphan.client.UI.TokenizePanel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtext.client.core.Margins;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.Viewport;
-import com.gwtext.client.widgets.layout.BorderLayout;
+import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
-import com.gwtext.client.widgets.layout.FitLayout;
-import com.gwtext.client.widgets.layout.LayoutData;
 
 
 
@@ -32,12 +28,18 @@ public class Application implements EntryPoint {
 	public static Panel navigationPanel;
 	public static LoginWidget loginPanel;
 	public static SearchPanel searchPanel;
+	public static TokenizePanel tokenizePanel;
+	
 	
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() { 
 	  loginPanel = new LoginWidget();
+	  tokenizePanel = new TokenizePanel();
+	  
+	  
+	  
 	 init(); 
      
   }
@@ -71,17 +73,6 @@ public class Application implements EntryPoint {
 		bld.setMargins(new Margins(0, 0, 0, 0));
 		bld.setSplit(true);
 		borderPanel.add(footerPanel, bld);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-				
 		
 		mainPanel.add(borderPanel);
 		RootPanel.get().add(mainPanel);

@@ -23,6 +23,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.CheckboxListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
@@ -99,10 +100,11 @@ public class LoginWidget extends Panel{
 		Hyperlink signUpLink = new Hyperlink("Sign up for my site", "signup");
 		signUpLink.addClickListener(new ClickListener(){
 			public void onClick(Widget widget){
+				MessageBox.alert("Login successfully");
 				RootPanel.get().clear();
 				Panel borderPanel  = new Panel();
 				borderPanel.add(Application.headerPanel);
-				borderPanel.add(Application.navigationPanel);		
+				borderPanel.add(Application.navigationPanel);
 				borderPanel.add(new SignUpPanel().getSignUpPanel());
 				borderPanel.add(Application.footerPanel);		
 				Panel mainPanel = new Panel();
@@ -150,7 +152,7 @@ public class LoginWidget extends Panel{
 					Panel borderPanel  = new Panel();
 					borderPanel.add(Application.headerPanel);
 					borderPanel.add(Application.navigationPanel);
-					borderPanel.add(new SearchPanel());
+					borderPanel.add(Application.searchPanel);
 					borderPanel.add(Application.footerPanel);		
 					Panel mainPanel = new Panel();
 					mainPanel.add(borderPanel);

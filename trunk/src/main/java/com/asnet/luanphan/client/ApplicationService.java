@@ -17,5 +17,5 @@ public interface ApplicationService extends RemoteService{
 	}
 	public boolean isExistsUser(User user);
 	//public FileInfo tokenize(FileInfo fileInfo);
-	//public FileInfo demo();
+	public FileInfo demo();
 }

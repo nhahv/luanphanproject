@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.lucene.analysis.Token;
 import org.apache.lucene.analysis.TokenStream;
 
-//import vn.hus.tokenizer.tokens.LexerToken;
+import vn.hus.tokenizer.tokens.LexerToken;
 
 import com.asnet.luanphan.client.ApplicationService;
 import com.asnet.luanphan.client.datamodel.FileInfo;
@@ -20,6 +20,7 @@ import com.asnet.luanphan.server.vntokenizer.VietnameseToken;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class ApplicationImpl extends RemoteServiceServlet  implements ApplicationService{
+	
 	public boolean isExistsUser(User user) {
 		boolean accepted = false;
 		DbUsers u = new DbUsers();
@@ -54,7 +55,13 @@ public class ApplicationImpl extends RemoteServiceServlet  implements Applicatio
 	    }
 		
 		VNAnalyzer analyzer = new VNAnalyzer();
-		String testStr = FileInput_Output.getData(filename);
+		String testStr="";
+		try {
+			testStr = FileInput_Output.getData(filename);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		TokenStream ts =analyzer.tokenStream("src\\test\\java\\dataTest\\stopword.txt", new StringReader(testStr));
 		while(true){
 			Token token;
@@ -65,12 +72,11 @@ public class ApplicationImpl extends RemoteServiceServlet  implements Applicatio
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
-			
+			}		
 		}
+		fileInfo.setFileContent(testStr);
 		fileInfo.setListVnTokens(listVnTokens);
-		System.out.println(listVnTokens);
+		
 		return fileInfo;
 		
 	}
