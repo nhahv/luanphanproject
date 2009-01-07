@@ -5,8 +5,6 @@ import java.sql.Connection;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.asnet.luanphan.server.DbConnection;
-
 
 
 public class DbConnectionTest {

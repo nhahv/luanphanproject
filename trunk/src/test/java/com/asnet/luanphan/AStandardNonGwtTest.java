@@ -1,7 +1,7 @@
 package com.asnet.luanphan;
 
-import junit.framework.TestCase;
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 public class AStandardNonGwtTest extends TestCase {
     

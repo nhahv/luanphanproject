@@ -1,6 +1,5 @@
 package com.asnet.luanphan.server.vntokenizer;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.lucene.analysis.Token;

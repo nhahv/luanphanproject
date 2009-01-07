@@ -1,31 +1,17 @@
 package com.asnet.luanphan.server.lucene.analysis;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.StringReader;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.LowerCaseFilter;
-import org.apache.lucene.analysis.StopAnalyzer;
-import org.apache.lucene.analysis.Token;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.standard.StandardFilter;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
+
+import vn.hus.tokenizer.tokens.LexerToken;
 
 import com.asnet.luanphan.server.lucene.VietStopword;
 import com.asnet.luanphan.server.vntokenizer.VNTokenizer;
 import com.asnet.luanphan.server.vntokenizer.VietnameseToken;
-
-
-
-
-import vn.hus.tokenizer.Tokenizer;
-import vn.hus.tokenizer.tokens.LexerToken;
 
 public class VNAnalyzer extends Analyzer {
 	

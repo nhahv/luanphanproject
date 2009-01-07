@@ -6,7 +6,6 @@ import com.google.gwt.user.client.ui.FormHandler;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormSubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormSubmitEvent;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -21,10 +20,9 @@ public class UploadPanel extends Panel{
 	private void init(){		
 		
 		final FormPanel formUpload = new FormPanel();
-		formUpload.setAction(GWT.getModuleBaseURL() + "upload");
 		formUpload.setMethod(FormPanel.METHOD_POST);
 		formUpload.setEncoding(FormPanel.ENCODING_MULTIPART);
-		
+		formUpload.setAction(GWT.getModuleBaseURL() + "uploadServlet");
 		VerticalPanel mainPanel = new VerticalPanel();
 		Button submitBtn = new Button("Submit");
 		submitBtn.addListener(new ButtonListenerAdapter(){
@@ -56,6 +54,7 @@ public class UploadPanel extends Panel{
 		});		
 		
 		this.add(formUpload);
+		this.setFrame(true);
 		
 	}
 }

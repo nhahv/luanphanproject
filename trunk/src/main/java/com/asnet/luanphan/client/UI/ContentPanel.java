@@ -1,7 +1,5 @@
 package com.asnet.luanphan.client.UI;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.HorizontalLayout;
 import com.gwtext.client.widgets.layout.VerticalLayout;

@@ -3,7 +3,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.asnet.luanphan.client.datamodel.User;
-import com.asnet.luanphan.server.DbUsers;
 
 
 public class DbUsersTest {
@@ -34,6 +33,15 @@ public class DbUsersTest {
 		result = dbUser.isUserValid(user);
 		Assert.assertEquals(expectedResult, result);
 	}
+	@Test
+	public void testInsertUser() throws Exception {
+		DbUsers dbUser = new DbUsers();
+		User user = new User();
+		user.loginname ="thyngoc";
+		user.password="abc123";
+		dbUser.insertDBUser(user);
+	}	
+		
 	
 
 	
