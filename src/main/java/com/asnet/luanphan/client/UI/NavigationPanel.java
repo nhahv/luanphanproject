@@ -1,7 +1,16 @@
 package com.asnet.luanphan.client.UI;
 
 
+import java.util.HashMap;
+import java.util.Iterator;
+
 import com.asnet.luanphan.client.Application;
+import com.asnet.luanphan.client.ApplicationServiceAsync;
+import com.asnet.luanphan.client.ApplicationService.Util;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -29,15 +38,8 @@ public class NavigationPanel extends Panel{
 		ToolbarButton homeButton = new ToolbarButton("Home");  
 		homeButton.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e){
-				RootPanel.get().clear();
-				Panel borderPanel  = new Panel();
-				borderPanel.add(Application.headerPanel);
-				borderPanel.add(Application.navigationPanel);
-				borderPanel.add(Application.searchPanel);
-				borderPanel.add(Application.footerPanel);		
-				Panel mainPanel = new Panel();
-				mainPanel.add(borderPanel);
-				RootPanel.get().add(mainPanel);
+				History.newItem("Home");			
+				
 			}
 		});
 		homeButton.setEnableToggle(true);  
@@ -55,6 +57,7 @@ public class NavigationPanel extends Panel{
 		uploadBtn.setPressed(true);
 		uploadBtn.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e){
+				History.newItem("upload");				
 				uploadFile();
 			}
 		});
@@ -66,6 +69,7 @@ public class NavigationPanel extends Panel{
 		downloadBtn.setPressed(true);
 		downloadBtn.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e){
+				History.newItem("download");
 				downloadFile();
 			}
 		});
@@ -79,6 +83,7 @@ public class NavigationPanel extends Panel{
 		loginBtn.setPressed(true);
 		loginBtn.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e){
+				History.newItem("login");
 				loginToSite();
 			}
 		});
@@ -88,15 +93,9 @@ public class NavigationPanel extends Panel{
 		ToolbarButton demo = new ToolbarButton("Demo VnTokenize and Lucene");  
 		demo.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e){
-				RootPanel.get().clear();
-				Panel borderPanel  = new Panel();
-				borderPanel.add(Application.headerPanel);
-				borderPanel.add(Application.navigationPanel);
-				borderPanel.add(Application.tokenizePanel);
-				borderPanel.add(Application.footerPanel);		
-				Panel mainPanel = new Panel();
-				mainPanel.add(borderPanel);
-				RootPanel.get().add(mainPanel);
+				History.newItem("demo");
+				doDemo();
+				
 			}
 		});
 		demo.setEnableToggle(true);  
@@ -116,7 +115,7 @@ public class NavigationPanel extends Panel{
 		
 		 
 	}	
-	private void loginToSite(){
+	public static void loginToSite(){
 		RootPanel.get().clear();
 		Panel borderPanel  = new Panel();
 		borderPanel.add(Application.headerPanel);
@@ -128,27 +127,90 @@ public class NavigationPanel extends Panel{
 		RootPanel.get().add(mainPanel);
 		
 	}
-	private void signup(){
-		
-		SignUpPanel signUpPanel = new SignUpPanel();
-		Panel panel = signUpPanel.getSignUpPanel();
-		BorderPanel borderPanel = new BorderPanel();
-		borderPanel.addCenterPanel(panel);
-		RootPanel.get().clear();
-		RootPanel.get().add(borderPanel.getBorderPanel());
-	}
-	private void uploadFile(){
+	public static void signup(){		
 		RootPanel.get().clear();
 		Panel borderPanel  = new Panel();
 		borderPanel.add(Application.headerPanel);
 		borderPanel.add(Application.navigationPanel);
+		borderPanel.add(Application.signupPanel);
+		borderPanel.add(Application.footerPanel);		
+		Panel mainPanel = new Panel();
+		mainPanel.add(borderPanel);
+		RootPanel.get().add(mainPanel);
+	}
+	public static void uploadFile(){
+		
+		RootPanel.get().clear();
+		Panel borderPanel  = new Panel();
+		borderPanel.add(Application.headerPanel);
+		borderPanel.add(Application.navigationPanel);
+		borderPanel.add(Application.welcomePanel);
 		borderPanel.add(new UploadPanel());
 		borderPanel.add(Application.footerPanel);		
 		Panel mainPanel = new Panel();
 		mainPanel.add(borderPanel);
 		RootPanel.get().add(mainPanel);
 	}
-	private void downloadFile(){
-		MessageBox.alert("Download function's here, but this does nothing");
-	}	
+	public static void downloadFile(){
+		session();		
+		//MessageBox.alert("Download function's here, but this does nothing");
+	}
+	public static void doDemo(){	
+		
+		RootPanel.get().clear();
+		Panel borderPanel  = new Panel();
+		borderPanel.add(Application.headerPanel);
+		borderPanel.add(Application.navigationPanel);
+		borderPanel.add(Application.welcomePanel);
+		borderPanel.add(Application.tokenizePanel);
+		borderPanel.add(Application.footerPanel);		
+		Panel mainPanel = new Panel();
+		mainPanel.add(borderPanel);
+		RootPanel.get().add(mainPanel);
+	}
+	public static void goHome(){
+		RootPanel.get().clear();
+		Panel borderPanel  = new Panel();
+		borderPanel.add(Application.headerPanel);
+		borderPanel.add(Application.navigationPanel);
+		borderPanel.add(Application.welcomePanel);
+		borderPanel.add(Application.searchPanel);
+		borderPanel.add(Application.footerPanel);		
+		Panel mainPanel = new Panel();
+		mainPanel.add(borderPanel);
+		RootPanel.get().add(mainPanel);
+	}
+	public static void session(){
+		
+		final ApplicationServiceAsync loginService = Util.getInstance();
+		ServiceDefTarget target = (ServiceDefTarget) loginService;
+		String moduleRelativeURL = GWT.getModuleBaseURL() + "applicationService";
+		target.setServiceEntryPoint(moduleRelativeURL);
+		final AsyncCallback<HashMap> callback = new AsyncCallback<HashMap>() {
+			public void onSuccess(HashMap result) {
+				
+				if (result.isEmpty()) {
+					MessageBox.alert("You have to login firstly");			
+					NavigationPanel.loginToSite();
+					
+				} else {
+					Iterator iterator = result.keySet().iterator();
+				      
+				      	String ss ="";
+				      while(iterator.hasNext()) {
+				        String username = (String) iterator.next();
+				        String password = (String) result.get(username);				        
+				        ss+="("+username+"  " + password + ")";
+				      }
+				      MessageBox.alert(ss);
+				}
+			}
+
+			public void onFailure(Throwable caught) {
+				MessageBox.alert("rpc unsuccessful");
+				//GWT.log("Error:", caught);
+			}
+		};
+		loginService.getAllLoginUser(callback);
+	}
 }

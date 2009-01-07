@@ -20,9 +20,10 @@ public class SearchPanel extends Panel{
 		
 		
 		FormPanel formPanel = new FormPanel();
+	    formPanel.setHeight(338);
 		formPanel.setBorder(true);
 		formPanel.setFrame(true);
-		formPanel.setPaddings(40);		
+		formPanel.setPaddings(70);		
 		formPanel.setLabelWidth(75);
 		formPanel.add(icon, new BorderLayoutData(RegionPosition.CENTER));
 		
@@ -42,7 +43,7 @@ public class SearchPanel extends Panel{
 		});		
 		formPanel.add(searchBtn);
 		formPanel.setMargins(0, 210, 0, 0);
-		this.setBorder(true);				
+		this.setBorder(true);		
 		this.add(formPanel);		
 	}	
 }

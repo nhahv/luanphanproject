@@ -1,6 +1,8 @@
 package com.asnet.luanphan.client;
 
 //import com.asnet.luanphan.client.datamodel.FileInfo;
+import java.util.HashMap;
+
 import com.asnet.luanphan.client.datamodel.FileInfo;
 import com.asnet.luanphan.client.datamodel.User;
 import com.google.gwt.core.client.GWT;
@@ -15,7 +17,11 @@ public interface ApplicationService extends RemoteService{
 			return GWT.create(ApplicationService.class);
 		}
 	}
-	public boolean isExistsUser(User user);
+	public HashMap isExistsUser(User user);
 	//public FileInfo tokenize(FileInfo fileInfo);
 	public FileInfo demo();
+	public HashMap getAllLoginUser();
+	public boolean isExistUserLoginname(String loginname);
+	public void createNewSession(String key, String value);
+	public void insertUser(User user);
 }

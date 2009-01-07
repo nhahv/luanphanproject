@@ -3,7 +3,6 @@ package com.asnet.luanphan.client.UI;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
-import com.gwtext.client.widgets.layout.VerticalLayout;
 
 public class MasterPanel extends Panel{
 	private HeaderPanel headerPanel;

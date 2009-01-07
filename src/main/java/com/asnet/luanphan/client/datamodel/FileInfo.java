@@ -3,9 +3,6 @@ package com.asnet.luanphan.client.datamodel;
 
 
 
-import java.util.List;
-
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class FileInfo implements IsSerializable{

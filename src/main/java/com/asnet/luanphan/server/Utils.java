@@ -12,7 +12,7 @@ public class Utils {
 		return (HashMap)session.getAttribute(key);
 	}
 	
-	public void  addSeccessfulUserToSession(String key, HttpSession session, String username, String password){
+	public static void  addSeccessfulUserToSession(String key, HttpSession session, String username, String password){
 		HashMap mapOfUser = Utils.getHashMapFromSession(key, session);
 		mapOfUser.put(username, password);
 	}

@@ -4,8 +4,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
-import com.gwtext.client.widgets.layout.LayoutData;
-import com.gwtext.client.widgets.layout.VerticalLayout;
 
 public class BorderPanel {
 	private Panel panel;

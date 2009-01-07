@@ -18,12 +18,13 @@ public class DbConnection {
 
 		
 		String url = "jdbc:mysql://192.168.1.11:3306/";
-
+		//String url="jdbc:mysql://localhost:3306/";
 		String db = "gwt_luanphan";
 		String driver = "com.mysql.jdbc.Driver";
 		String user = "luanphan";
 		String pass = "asnet@123";
-
+		//String user = "root";
+		//String pass = "mysql";
 		try {
 
 			Class.forName(driver).newInstance();
@@ -31,7 +32,7 @@ public class DbConnection {
 
 		} catch (Exception e) {
 
-//			MessageBox.alert(e.getMessage());
+
 			System.out.println("Error" +e);
 		}
 		

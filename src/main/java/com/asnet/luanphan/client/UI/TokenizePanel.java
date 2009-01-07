@@ -9,20 +9,16 @@ import com.asnet.luanphan.client.datamodel.FileInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
-import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.core.EventObject;  
-import com.gwtext.client.core.Ext;
-import com.gwtext.client.core.ExtElement;
-import com.gwtext.client.core.RegionPosition;  
-import com.gwtext.client.widgets.Button;  
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.RegionPosition;
+import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.MessageBox;
-import com.gwtext.client.widgets.TabPanel;  
-import com.gwtext.client.widgets.Window;  
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;  
-import com.gwtext.client.widgets.form.FormPanel;
-import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.layout.BorderLayout;  
-import com.gwtext.client.widgets.layout.BorderLayoutData; 
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.TabPanel;
+import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.layout.BorderLayout;
+import com.gwtext.client.widgets.layout.BorderLayoutData;
 public class TokenizePanel extends Panel{
 	private String filename ="no file to tokenize";
 	private String listLexer ="There is no Lexer";
@@ -79,7 +75,7 @@ public class TokenizePanel extends Panel{
 							
 							
 							
-						    navPanel.setWidth(200);  
+						    navPanel.setWidth(350);  
 						    navPanel.setCollapsible(false);  
 						      
 						    BorderLayoutData centerData = new BorderLayoutData(RegionPosition.CENTER);  
