@@ -93,15 +93,7 @@ public class LoginWidget extends Panel{
 		
 		rememberMe = new Checkbox();  
 		rememberMe.setBoxLabel("Remember my ID & password");  
-		rememberMe.addListener(new CheckboxListenerAdapter() {  
-		           public void onCheck(Checkbox field, boolean checked) {  
-		               if (rememberMe.getValue()) {  
-		                   MessageBox.alert("You have checked, but this function hasn't been completed yet");
-		               } else {  
-		                    MessageBox.alert("You have just unchecked, but this function hasn't been completed yet!" );
-		               }  
-		           }  
-		       });
+		
 				
 		loginForm.add(loginName);
 		loginForm.add(password);
@@ -175,7 +167,10 @@ public class LoginWidget extends Panel{
 						}					
 					    final long DURATION = 1000 * 60 * 60 * 24 * 14; //duration remembering login. 2 weeks in this example.
 					    Date expires = new Date(System.currentTimeMillis() + DURATION);
-					    Cookies.setCookie("iid", sessionID, expires, null, "/", false);
+					    Cookies.setCookie("remember", sessionID, expires, null, "/", false);
+					    Cookies.setCookie("login", sessionID);
+					}else {
+						Cookies.setCookie("login", sessionID);
 					}
 					
 					final ExtElement element = Ext.get("loginPanel");

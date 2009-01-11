@@ -66,26 +66,11 @@ public class Application implements EntryPoint, HistoryListener {
 	  
 	  welcomeLabel.setStyle("font-size:13; color:blue;");
 	  //create welcome string 	  
-	  String sessionID = Cookies.getCookie("iid");	  
+	  String sessionID = Cookies.getCookie("remember");	  
 	  if ( sessionID != null ){
 		  String[] strs = sessionID.split(";");
 		  welcomeLabel.setText("Welcome, " + strs[0]);
-		  final ApplicationServiceAsync createSession = Util.getInstance();
-			ServiceDefTarget target = (ServiceDefTarget) createSession;
-
-			String moduleRelativeURL = GWT.getModuleBaseURL() + "applicationService";
-			target.setServiceEntryPoint(moduleRelativeURL);
-			AsyncCallback callback = new AsyncCallback(){
-				public void onFailure(Throwable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				public void onSuccess(Object arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-			};
-			createSession.createNewSession(strs[0], strs[1], callback);
+		  Cookies.setCookie("login", "yes");
 	  }else
 		  welcomeLabel.setText("Welcome");
 	
