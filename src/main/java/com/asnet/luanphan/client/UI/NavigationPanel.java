@@ -1,6 +1,7 @@
 package com.asnet.luanphan.client.UI;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -8,6 +9,7 @@ import com.asnet.luanphan.client.Application;
 import com.asnet.luanphan.client.ApplicationServiceAsync;
 import com.asnet.luanphan.client.ApplicationService.Util;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -88,6 +90,16 @@ public class NavigationPanel extends Panel{
 			}
 		});
 		toolbar.addButton(loginBtn);
+		
+		ToolbarButton logout = new ToolbarButton("Logout");  
+		logout.setEnableToggle(true);  
+		logout.setPressed(true);
+		logout.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e){				
+				logout();
+			}
+		});
+		toolbar.addButton(logout);
 		
 		toolbar.addSeparator();
 		ToolbarButton demo = new ToolbarButton("Demo VnTokenize and Lucene");  
@@ -180,37 +192,22 @@ public class NavigationPanel extends Panel{
 		mainPanel.add(borderPanel);
 		RootPanel.get().add(mainPanel);
 	}
+	public static void logout(){
+		Date expires = new Date(System.currentTimeMillis() + 0);
+		Cookies.setCookie("remember", "", expires, null, "/", false);
+		Cookies.removeCookie("login");		
+		Application.welcomeLabel.setText("Welcome");
+		goHome();
+	}
 	public static void session(){
-		
-		final ApplicationServiceAsync loginService = Util.getInstance();
-		ServiceDefTarget target = (ServiceDefTarget) loginService;
-		String moduleRelativeURL = GWT.getModuleBaseURL() + "applicationService";
-		target.setServiceEntryPoint(moduleRelativeURL);
-		final AsyncCallback<HashMap> callback = new AsyncCallback<HashMap>() {
-			public void onSuccess(HashMap result) {
-				
-				if (result.isEmpty()) {
-					MessageBox.alert("You have to login firstly");			
-					NavigationPanel.loginToSite();
-					
-				} else {
-					Iterator iterator = result.keySet().iterator();
-				      
-				      	String ss ="";
-				      while(iterator.hasNext()) {
-				        String username = (String) iterator.next();
-				        String password = (String) result.get(username);				        
-				        ss+="("+username+"  " + password + ")";
-				      }
-				      MessageBox.alert(ss);
-				}
-			}
-
-			public void onFailure(Throwable caught) {
-				MessageBox.alert("rpc unsuccessful");
-				//GWT.log("Error:", caught);
-			}
-		};
-		loginService.getAllLoginUser(callback);
+		String sessLogin = Cookies.getCookie("login");
+		String sessRem = Cookies.getCookie("iid");
+		if (sessLogin != null){
+			MessageBox.alert("You can download now");
+			  
+		  }else{
+			  MessageBox.alert("please, login");
+			  NavigationPanel.loginToSite();
+		  }		
 	}
 }

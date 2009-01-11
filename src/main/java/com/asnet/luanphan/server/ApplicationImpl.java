@@ -62,6 +62,8 @@ public class ApplicationImpl extends RemoteServiceServlet  implements Applicatio
 		if(u.isUserValid(user)){
 			//accepted = true;
 			Utils.addSeccessfulUserToSession(ALL_SUCCESSFUL_USER, getSession(), user.loginname, user.password);
+			HttpSession session = getSession();
+			session.setAttribute("login", "yes");
 			hashMap.put(user.loginname, user.password);
 			return hashMap;
 		}		
@@ -77,10 +79,11 @@ public class ApplicationImpl extends RemoteServiceServlet  implements Applicatio
 		String listVnTokens="";
 		VietnameseToken vietnameseToken = new VietnameseToken();
 		String filename = "src\\test\\java\\dataTest\\data.txt";
-		fileInfo.setFileName("data.txt");
+		fileInfo.setFileName("Filename: data.txt");
 		List<LexerToken> listLexerToken = vietnameseToken.tokenize(filename);
 		for(Iterator<LexerToken> i = listLexerToken.iterator(); i.hasNext();){
-			System.out.println(i.next().toString());
+			listLexers+=i.next().toString() + "<br>";
+			
 		}
 		fileInfo.setListLexers(listLexers);
 		VNTokenizer vnTokenizer = new VNTokenizer(listLexerToken);
@@ -105,7 +108,7 @@ public class ApplicationImpl extends RemoteServiceServlet  implements Applicatio
 			try {
 				token = ts.next();
 				if(token==null) break;
-				listVnTokens =  token + listVnTokens+ "<br>";
+				listVnTokens +=  token +  "<br>";
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
