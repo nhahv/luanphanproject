@@ -10,6 +10,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.MessageBox;
@@ -17,8 +18,17 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.HtmlEditor;
+import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.form.VType;
+import com.gwtext.client.widgets.layout.AnchorLayoutData;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
+import com.gwtext.client.widgets.layout.ColumnLayout;
+import com.gwtext.client.widgets.layout.ColumnLayoutData;
+import com.gwtext.client.widgets.layout.FormLayout;
+import com.gwtext.client.widgets.layout.HorizontalLayout;
 public class TokenizePanel extends Panel{
 	private String filename ="no file to tokenize";
 	private String listLexer ="There is no Lexer";
@@ -110,8 +120,66 @@ public class TokenizePanel extends Panel{
 					demoService.demo(callback);
 					 
 	    	}  
-	    });  
-	    this.add(button);  
+	    }); 
+	       
+	         
+	    Panel main = new Panel();
+	    main.setFrame(true);
+	    main.setLayout(new HorizontalLayout(5));
+	    
+	    TabPanel tabPanel = new TabPanel();
+	    tabPanel.setHeight(300);
+	    tabPanel.setWidth(450);
+	    tabPanel.setActiveItem(0);
+	    
+	    Panel panel1 = new Panel();
+	    panel1.setTitle("All tokens");
+	    
+	    TextField allField = new TextField();
+	    allField.setHeight(300);
+	    allField.setAutoHeight(true);
+	    panel1.add(allField);
+	    
+	    Panel panel2 = new Panel();
+	    panel2.setTitle("Remove stopwords");
+	    
+	    TextField remField = new TextField();
+	    remField.setHeight(300);
+	    remField.setAutoHeight(true);
+	    panel2.add(remField);
+	    
+	    tabPanel.add(panel1);
+	    tabPanel.add(panel2);
+	    
+	    
+	    Panel panel = new Panel();	   
+	    panel.setBorder(false);  
+	    panel.setPaddings(15);  
+	       
+	    FormPanel formPanel = new FormPanel();  
+	    formPanel.setFrame(true);  
+	    formPanel.setTitle("Content");  
+	    formPanel.setPaddings(5, 5, 5, 0);  
+	    formPanel.setWidth(460);  
+	    formPanel.setLabelAlign(Position.TOP);  
+	  
+	  
+	    //add a HtmlEditor below the 2-column top panel  
+	    HtmlEditor htmlEditor = new HtmlEditor("Biography", "bio");  
+	    htmlEditor.setHeight(100);  
+	     formPanel.add(htmlEditor, new AnchorLayoutData("98%"));  
+	      
+	            //add a couple of buttons to the form  
+	    formPanel.addButton(new Button("Tokenize"));   
+	    panel.add(formPanel); 	   
+	   
+	    
+	    main.add(panel);
+	    main.add(tabPanel);
+	    this.add(main);
+	    this.add(button); 
+	    
+	     
 	      
 	    	    
 	}

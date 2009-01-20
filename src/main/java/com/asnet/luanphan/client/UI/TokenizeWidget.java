@@ -19,6 +19,7 @@ import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
+import com.gwtext.client.widgets.layout.HorizontalLayout;
 public class TokenizeWidget extends Panel{
 	private Panel panel = new Panel();
 	private String filename ="no file to tokenize";
@@ -65,7 +66,7 @@ public class TokenizeWidget extends Panel{
 						    tabPanel.add(removeStopword);  
 						   
 						      
-						            //west panel  
+						            
 						    Panel navPanel = new Panel();  
 						    navPanel.setTitle("File content");
 						    
@@ -114,7 +115,29 @@ public class TokenizeWidget extends Panel{
 					demoService.demo(callback);			 	 
 	    	} 
 	    });  
-	    panel.add(button);  
+	    Panel main = new Panel();
+	    main.setLayout(new HorizontalLayout(5));
+	    
+	    TabPanel tabPanel = new TabPanel();
+	    tabPanel.setActiveItem(0);
+	    
+	    Panel panel1 = new Panel();
+	    panel1.setTitle("All tokens");
+	    
+	    Panel panel2 = new Panel();
+	    panel2.setTitle("Remove stopwords");
+	    
+	    tabPanel.add(panel1);
+	    tabPanel.add(panel2);
+	    
+	    Panel content = new Panel();
+	    content.setTitle("Content");
+	    
+	    main.add(content);
+	    main.add(tabPanel);
+	    panel.add(main);
+	    panel.add(button); 
+	    panel.add(new Button("LuanPhan"));
 	      
 	    	    
 	}
